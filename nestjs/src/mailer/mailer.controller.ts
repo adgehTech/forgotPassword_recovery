@@ -6,6 +6,6 @@ export class MailerController {
  constructor(private readonly mailerService: MailerService){}
   @Post('forgotpassword')
   sendEmail() { 
-    this.mailerService.sendEmail("adgehtech@gmail.com", "6712");
+    this.mailerService.sendEmail("adgehtech@gmail.com", "1234");
   };
 }

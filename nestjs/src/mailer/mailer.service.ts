@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { nodemailer } from 'nodemailer';
+import * as nodemailer from 'nodemailer';
 require("dotenv").config()
 
 @Injectable()
 export class MailerService {
-    sendEmail(recipient: string, message: string): Promise <any>{
+    sendEmail(recipient: string, message: string){
         return new Promise((resolve, reject) => {
           var transporter = nodemailer.createTransport({
             service: "gmail",
@@ -23,8 +23,6 @@ export class MailerService {
                 <head>
                   <meta charset="UTF-8">
                   <title>nestjs emailing</title>
-                  
-          
                 </head>
                 <body>
                   <h1>Your verification code is: ${message}</h1>
@@ -34,8 +32,10 @@ export class MailerService {
               transporter.sendMail(mail_configs, function (error, info) {
                 if (error) {
                   console.log(error);
+                  // return { message: `Error happend while sending...` }
                   return reject({ message: `Error happend while sending...` });
                 }
+                // return "Email sent succesfuly"
                 return resolve({ message: "Email sent succesfuly" });
               });
         });
